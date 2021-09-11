@@ -90,7 +90,19 @@ void feature5(FILE *fout, int *parr, int length, char *op){
         fprintf(fout,"%d\n",max);
     }
 }
-void feature6(FILE *fin, struct Obj_t *pobj){}
+void feature6(FILE *fin, struct Obj_t *pobj){
+    char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
+    char* name = (char *)calloc(_MAX_LONG,sizeof(char));
+    int id=0;
+    pobj->nombre = (char *)calloc(_MAX_LONG,sizeof(char));
+    char* bsh;
+    fgets(buf,_MAX_LONG,fin);
+    name = strtok(buf,",");
+    id = strtol(strtok(NULL,","),&bsh,10);
+    strcpy(pobj->nombre,name);
+    pobj->cedula = id;
+    free(buf);
+}
 void feature7(FILE *fout, struct Obj_t *pobj){}
 void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){}
 void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){}
