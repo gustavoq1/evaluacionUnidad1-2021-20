@@ -107,5 +107,34 @@ void feature7(FILE *fout, struct Obj_t *pobj){
     fprintf(fout,"%d, %s",pobj->cedula, pobj->nombre);
     free(pobj->nombre);
 }
-void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){}
+void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){
+    char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
+    int N=0, j=0;
+    char *bsh, *tmp;
+    fgets(buf,_MAX_LONG,fin);
+    N = strtol(buf,&bsh,10);
+    struct _courseInfo_t *parr = (struct _courseInfo_t *)calloc(N,sizeof(struct _courseInfo_t));
+    printf("Ingresa la Info del Curso\nNombre,Credito,Nota\n");
+    for(int i=0;i<N;i++){
+        j=0;
+        printf("Curso %d: ",i+1);
+        fgets(buf,_MAX_LONG,stdin);
+        tmp = strtok(buf,",");
+        while(tmp != NULL){
+            if(j==0){
+                strcpy(parr[i].name,tmp);
+            }else if(j==1){
+                parr[i].credits = strtol(tmp,&bsh,10);
+            }else if(j==2){
+                parr[i].grade = strtof(tmp,&bsh);
+            }
+            j++;
+            tmp = strtok(NULL,",");
+        }
+    }
+    *pobj = parr;
+    *length = N;
+    free(buf);
+    fclose(fin);
+}
 void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){}
