@@ -65,7 +65,31 @@ void feature4(FILE *fin, int **parr, int *length, char **op){
     free(buf);
     free(tmp);
 }
-void feature5(FILE *fout, int *parr, int length, char *op){}
+void feature5(FILE *fout, int *parr, int length, char *op){
+    if(strcmp(op,"avg")==0){
+        int sum =0;
+        for(short i=0;i <length-1;i++){
+            sum = sum +parr[i];
+        }
+        fprintf(fout,"%d\n",sum/(length-1));
+    }else if(strcmp(op,"min")==0){
+        int min = 5000;
+        for(short i=0;i <length-1;i++){
+            if(parr[i] < min){
+                min = parr[i];
+            }
+        }
+        fprintf(fout,"%d\n",min);
+    }else if(strcmp(op,"max")==0){
+        int max = -5000;
+        for(short i=0;i <length-1;i++){
+            if(parr[i] < max){
+                max = parr[i];
+            }
+        }
+        fprintf(fout,"%d\n",max);
+    }
+}
 void feature6(FILE *fin, struct Obj_t *pobj){}
 void feature7(FILE *fout, struct Obj_t *pobj){}
 void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){}
