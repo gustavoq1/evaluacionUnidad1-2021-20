@@ -24,7 +24,28 @@ void feature2(FILE *fin, FILE *fout){
     free(buf);
     free(tmp);
 }
-void feature3(FILE *fin, FILE *fout){}
+void feature3(FILE *fin, FILE *fout){
+    char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
+    char* tmp = (char* )calloc(4,sizeof(char));
+    char* bsh;
+    short* number = (short *)calloc(_MAX_LONG,sizeof(short));
+    short i=0;
+    int sum=0;
+    fgets(buf,_MAX_LONG,fin);
+    tmp =strtok(buf," ");
+    while(tmp != NULL){
+        number[i] = strtol(tmp,&bsh,10);
+        sum = sum + number[i];
+        tmp = strtok(NULL," ");
+        i++;
+    }
+    fprintf(fout,"%d\n",sum);
+    free(number);
+    free(tmp);
+    free(buf);
+    free(bsh);
+
+}
 void feature4(FILE *fin, int **parr, int *length, char **op){}
 void feature5(FILE *fout, int *parr, int length, char *op){}
 void feature6(FILE *fin, struct Obj_t *pobj){}
