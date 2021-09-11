@@ -46,7 +46,25 @@ void feature3(FILE *fin, FILE *fout){
     free(bsh);
 
 }
-void feature4(FILE *fin, int **parr, int *length, char **op){}
+void feature4(FILE *fin, int **parr, int *length, char **op){
+    char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
+    char* tmp = (char *)calloc(4,sizeof(char));
+    *parr = (int *)calloc(_MAX_LONG,sizeof(int));
+    char* bsh = (char *)calloc(_MAX_LONG,sizeof(char));
+    *op = (char *)calloc(4,sizeof(char));
+    int i =0;
+    fgets(buf,_MAX_LONG,fin);
+    tmp = strtok(buf," ");
+    while(tmp != NULL){
+        (*parr)[i] = strtol(tmp,&bsh,10);
+        tmp = strtok(NULL," ");
+        i++;
+    }
+    strncpy(*op,bsh,3);
+    *length = i;
+    free(buf);
+    free(tmp);
+}
 void feature5(FILE *fout, int *parr, int length, char *op){}
 void feature6(FILE *fin, struct Obj_t *pobj){}
 void feature7(FILE *fout, struct Obj_t *pobj){}
