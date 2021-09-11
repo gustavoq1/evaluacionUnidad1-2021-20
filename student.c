@@ -9,7 +9,21 @@ void feature1(FILE *fin, FILE *fout){
     fprintf(fout,"%s",buf);
     free(buf);
 }
-void feature2(FILE *fin, FILE *fout){}
+void feature2(FILE *fin, FILE *fout){
+    char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
+    char* tmp = (char *)calloc(1,sizeof(char));
+    fgets(buf,_MAX_LONG,fin);
+    buf = strtok (buf,"\n");
+    int lng = strlen(buf);
+    for(int iz=0; iz < (lng/2);iz++){
+        *tmp = buf[iz];
+        buf[iz] = buf[lng - iz -1];
+        buf[lng - iz -1] = *tmp;
+    }
+    fprintf(fout,"%s\n",buf);
+    free(buf);
+    free(tmp);
+}
 void feature3(FILE *fin, FILE *fout){}
 void feature4(FILE *fin, int **parr, int *length, char **op){}
 void feature5(FILE *fout, int *parr, int length, char *op){}
