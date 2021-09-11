@@ -103,6 +103,9 @@ void feature6(FILE *fin, struct Obj_t *pobj){
     pobj->cedula = id;
     free(buf);
 }
-void feature7(FILE *fout, struct Obj_t *pobj){}
+void feature7(FILE *fout, struct Obj_t *pobj){
+    fprintf(fout,"%d, %s",pobj->cedula, pobj->nombre);
+    free(pobj->nombre);
+}
 void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){}
 void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){}
