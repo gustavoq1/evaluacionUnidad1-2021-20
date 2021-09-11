@@ -137,4 +137,25 @@ void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){
     free(buf);
     fclose(fin);
 }
-void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){}
+void feature9(FILE *fout, struct _courseInfo_t *pobj,int length){
+    char* buf = (char *)calloc(10,sizeof(char));
+    float TotNota =0, TotCreditos=0;
+    float promedio =0;
+    for(int i=0; i<length;i++){
+        TotNota = TotNota + pobj[i].grade*pobj[i].credits;
+        TotCreditos = TotCreditos + pobj[i].credits;
+    }
+    promedio = TotNota/TotCreditos;
+    printf("Desea Almacenar la Informacion? (S) o (N)");
+    fgets(buf,10,stdin);
+    char *tmp = strtok(buf,"\n");
+    if(strcmp(tmp,"s")==0 || strcmp(tmp,"S")==0){
+        for(short i=0;i<length;i++){
+            fprintf(fout,"%s, %d, %f\n",pobj[i].name,pobj[i].credits,pobj[i].grade);
+        }
+    }
+    fprintf(fout,"Promedio Ponderado: %f",promedio);
+    free(buf);
+    free(pobj);
+    fclose(fout);
+}
