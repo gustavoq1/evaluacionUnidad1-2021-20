@@ -9,13 +9,14 @@ int main(int argc, char *argv[]){
         return(EXIT_FAILURE);
     }
 
+
     FILE *fin = fopen(argv[1],"r");
     if (fin == NULL){
         perror("open fin file fails: ");
         return(EXIT_FAILURE);
     }
 
-    FILE *fout = fopen(argv[2],"w");
+    FILE *fout = fopen(argv[2],"a+");
     if (fout == NULL){
         perror("open fout file fails: ");
         return(EXIT_FAILURE);
