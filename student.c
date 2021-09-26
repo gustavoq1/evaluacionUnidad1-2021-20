@@ -7,7 +7,7 @@ void feature1(FILE *fin, FILE *fout){
     char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
     fgets(buf,_MAX_LONG,fin);
     fprintf(fout,"%s",buf);
-    free(buf);
+    //free(buf);
 }
 void feature2(FILE *fin, FILE *fout){
     char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
@@ -24,27 +24,23 @@ void feature2(FILE *fin, FILE *fout){
     free(buf);
     free(tmp);
 }
-void feature3(FILE *fin, FILE *fout){
-    char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
-    char* tmp = (char* )calloc(4,sizeof(char));
-    char* bsh;
-    short* number = (short *)calloc(_MAX_LONG,sizeof(short));
-    short i=0;
-    int sum=0;
-    fgets(buf,_MAX_LONG,fin);
-    tmp =strtok(buf," ");
-    while(tmp != NULL){
-        number[i] = strtol(tmp,&bsh,10);
-        sum = sum + number[i];
-        tmp = strtok(NULL," ");
-        i++;
-    }
-    fprintf(fout,"%d\n",sum);
-    free(number);
-    free(tmp);
-    free(buf);
-    free(bsh);
+void feature3(FILE *fin, FILE *fout) {
+    char buffer[128];
+    char *status = NULL;
+    char *endptr;
+    char *saveEndptr;
+    int i = 0;
+    status = fgets(buffer, sizeof(buffer), fin);
 
+    if (status != NULL) {
+        int suma = 0;
+        saveEndptr = buffer;
+        while (*saveEndptr != 0x0a) {
+            suma += strtol(saveEndptr, &endptr, 10);
+            saveEndptr = endptr;
+        }
+        fprintf(fout, "%d\n", suma);
+    }
 }
 void feature4(FILE *fin, int **parr, int *length, char **op){
     char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
@@ -106,6 +102,7 @@ void feature6(FILE *fin, struct Obj_t *pobj){
 void feature7(FILE *fout, struct Obj_t *pobj){
     fprintf(fout,"%d, %s",pobj->cedula, pobj->nombre);
     free(pobj->nombre);
+    fprintf(fout,"%s","\n");
 }
 void feature8(FILE *fin, struct _courseInfo_t **pobj,int *length){
     char* buf = (char *)calloc(_MAX_LONG,sizeof(char));
